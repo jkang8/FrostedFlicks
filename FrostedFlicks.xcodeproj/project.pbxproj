@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		811ED9F61CE959A800ABAB5B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811ED9F51CE959A800ABAB5B /* AppDelegate.swift */; };
-		811ED9F81CE959A800ABAB5B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811ED9F71CE959A800ABAB5B /* ViewController.swift */; };
 		811ED9FB1CE959A800ABAB5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811ED9F91CE959A800ABAB5B /* Main.storyboard */; };
 		811ED9FD1CE959A800ABAB5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 811ED9FC1CE959A800ABAB5B /* Assets.xcassets */; };
-		811EDA001CE959A800ABAB5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 811ED9FE1CE959A800ABAB5B /* LaunchScreen.storyboard */; };
 		811EDA0B1CE959A800ABAB5B /* FrostedFlicksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EDA0A1CE959A800ABAB5B /* FrostedFlicksTests.swift */; };
+		811EDA161CE9696600ABAB5B /* FlickrGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811EDA151CE9696600ABAB5B /* FlickrGalleryViewController.swift */; };
+		A65227D629F70FF2170C85B3 /* Pods_FrostedFlicksTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B28A8118049C975C472FCAE /* Pods_FrostedFlicksTests.framework */; };
+		B73D858C5E39774119378FE0 /* Pods_FrostedFlicks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEA2B70EF684A739D018DD68 /* Pods_FrostedFlicks.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,16 +27,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F915E0DCF605754BF1CB2E6 /* Pods-FrostedFlicks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrostedFlicks.release.xcconfig"; path = "Pods/Target Support Files/Pods-FrostedFlicks/Pods-FrostedFlicks.release.xcconfig"; sourceTree = "<group>"; };
+		36DA7F959ADC480C6E6B8079 /* Pods-FrostedFlicksTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrostedFlicksTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FrostedFlicksTests/Pods-FrostedFlicksTests.release.xcconfig"; sourceTree = "<group>"; };
 		811ED9F21CE959A800ABAB5B /* FrostedFlicks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrostedFlicks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		811ED9F51CE959A800ABAB5B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		811ED9F71CE959A800ABAB5B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		811ED9FA1CE959A800ABAB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		811ED9FC1CE959A800ABAB5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		811ED9FF1CE959A800ABAB5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		811EDA011CE959A800ABAB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		811EDA061CE959A800ABAB5B /* FrostedFlicksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FrostedFlicksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		811EDA0A1CE959A800ABAB5B /* FrostedFlicksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostedFlicksTests.swift; sourceTree = "<group>"; };
 		811EDA0C1CE959A800ABAB5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		811EDA151CE9696600ABAB5B /* FlickrGalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrGalleryViewController.swift; sourceTree = "<group>"; };
+		8B28A8118049C975C472FCAE /* Pods_FrostedFlicksTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FrostedFlicksTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE94C1E3FAF05DD3F957FFD7 /* Pods-FrostedFlicks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrostedFlicks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FrostedFlicks/Pods-FrostedFlicks.debug.xcconfig"; sourceTree = "<group>"; };
+		C8441D2054262807A0CE8D7E /* Pods-FrostedFlicksTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FrostedFlicksTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FrostedFlicksTests/Pods-FrostedFlicksTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EEA2B70EF684A739D018DD68 /* Pods_FrostedFlicks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FrostedFlicks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B73D858C5E39774119378FE0 /* Pods_FrostedFlicks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,18 +57,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A65227D629F70FF2170C85B3 /* Pods_FrostedFlicksTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		76D73F25D0FDD970DEB1D82E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EEA2B70EF684A739D018DD68 /* Pods_FrostedFlicks.framework */,
+				8B28A8118049C975C472FCAE /* Pods_FrostedFlicksTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		811ED9E91CE959A800ABAB5B = {
 			isa = PBXGroup;
 			children = (
 				811ED9F41CE959A800ABAB5B /* FrostedFlicks */,
 				811EDA091CE959A800ABAB5B /* FrostedFlicksTests */,
 				811ED9F31CE959A800ABAB5B /* Products */,
+				E1EA5BC9CBA1A3FCB15793B6 /* Pods */,
+				76D73F25D0FDD970DEB1D82E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,11 +97,10 @@
 			isa = PBXGroup;
 			children = (
 				811ED9F51CE959A800ABAB5B /* AppDelegate.swift */,
-				811ED9F71CE959A800ABAB5B /* ViewController.swift */,
 				811ED9F91CE959A800ABAB5B /* Main.storyboard */,
 				811ED9FC1CE959A800ABAB5B /* Assets.xcassets */,
-				811ED9FE1CE959A800ABAB5B /* LaunchScreen.storyboard */,
 				811EDA011CE959A800ABAB5B /* Info.plist */,
+				811EDA151CE9696600ABAB5B /* FlickrGalleryViewController.swift */,
 			);
 			path = FrostedFlicks;
 			sourceTree = "<group>";
@@ -96,6 +114,17 @@
 			path = FrostedFlicksTests;
 			sourceTree = "<group>";
 		};
+		E1EA5BC9CBA1A3FCB15793B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AE94C1E3FAF05DD3F957FFD7 /* Pods-FrostedFlicks.debug.xcconfig */,
+				0F915E0DCF605754BF1CB2E6 /* Pods-FrostedFlicks.release.xcconfig */,
+				C8441D2054262807A0CE8D7E /* Pods-FrostedFlicksTests.debug.xcconfig */,
+				36DA7F959ADC480C6E6B8079 /* Pods-FrostedFlicksTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +132,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 811EDA0F1CE959A800ABAB5B /* Build configuration list for PBXNativeTarget "FrostedFlicks" */;
 			buildPhases = (
+				4AE8DDABB6F9FD0E36BA2DD6 /* 📦 Check Pods Manifest.lock */,
 				811ED9EE1CE959A800ABAB5B /* Sources */,
 				811ED9EF1CE959A800ABAB5B /* Frameworks */,
 				811ED9F01CE959A800ABAB5B /* Resources */,
+				214495C9F77667EF4B2473B8 /* 📦 Embed Pods Frameworks */,
+				F955F632D1A1CBB0F940F2F0 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -120,9 +152,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 811EDA121CE959A800ABAB5B /* Build configuration list for PBXNativeTarget "FrostedFlicksTests" */;
 			buildPhases = (
+				3F6C90284D426C756234D0AD /* 📦 Check Pods Manifest.lock */,
 				811EDA021CE959A800ABAB5B /* Sources */,
 				811EDA031CE959A800ABAB5B /* Frameworks */,
 				811EDA041CE959A800ABAB5B /* Resources */,
+				66311B23988BD842CA03ABBF /* 📦 Embed Pods Frameworks */,
+				16BF7C8468CD48F4A91D6936 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -177,7 +212,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				811EDA001CE959A800ABAB5B /* LaunchScreen.storyboard in Resources */,
 				811ED9FD1CE959A800ABAB5B /* Assets.xcassets in Resources */,
 				811ED9FB1CE959A800ABAB5B /* Main.storyboard in Resources */,
 			);
@@ -192,12 +226,105 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		16BF7C8468CD48F4A91D6936 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FrostedFlicksTests/Pods-FrostedFlicksTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		214495C9F77667EF4B2473B8 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FrostedFlicks/Pods-FrostedFlicks-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3F6C90284D426C756234D0AD /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4AE8DDABB6F9FD0E36BA2DD6 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		66311B23988BD842CA03ABBF /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FrostedFlicksTests/Pods-FrostedFlicksTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F955F632D1A1CBB0F940F2F0 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FrostedFlicks/Pods-FrostedFlicks-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		811ED9EE1CE959A800ABAB5B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				811ED9F81CE959A800ABAB5B /* ViewController.swift in Sources */,
+				811EDA161CE9696600ABAB5B /* FlickrGalleryViewController.swift in Sources */,
 				811ED9F61CE959A800ABAB5B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,14 +354,6 @@
 				811ED9FA1CE959A800ABAB5B /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		811ED9FE1CE959A800ABAB5B /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				811ED9FF1CE959A800ABAB5B /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -327,6 +446,7 @@
 		};
 		811EDA101CE959A800ABAB5B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE94C1E3FAF05DD3F957FFD7 /* Pods-FrostedFlicks.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FrostedFlicks/Info.plist;
@@ -338,6 +458,7 @@
 		};
 		811EDA111CE959A800ABAB5B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F915E0DCF605754BF1CB2E6 /* Pods-FrostedFlicks.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FrostedFlicks/Info.plist;
@@ -349,6 +470,7 @@
 		};
 		811EDA131CE959A800ABAB5B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C8441D2054262807A0CE8D7E /* Pods-FrostedFlicksTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = FrostedFlicksTests/Info.plist;
@@ -361,6 +483,7 @@
 		};
 		811EDA141CE959A800ABAB5B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36DA7F959ADC480C6E6B8079 /* Pods-FrostedFlicksTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = FrostedFlicksTests/Info.plist;
@@ -390,6 +513,7 @@
 				811EDA111CE959A800ABAB5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		811EDA121CE959A800ABAB5B /* Build configuration list for PBXNativeTarget "FrostedFlicksTests" */ = {
 			isa = XCConfigurationList;
@@ -398,6 +522,7 @@
 				811EDA141CE959A800ABAB5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

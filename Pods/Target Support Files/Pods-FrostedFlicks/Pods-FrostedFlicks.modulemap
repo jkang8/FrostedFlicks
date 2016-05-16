@@ -1,0 +1,6 @@
+framework module Pods_FrostedFlicks {
+  umbrella header "Pods-FrostedFlicks-umbrella.h"
+
+  export *
+  module * { export * }
+}

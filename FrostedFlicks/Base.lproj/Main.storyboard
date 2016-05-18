@@ -38,7 +38,7 @@
             </objects>
             <point key="canvasLocation" x="1889" y="388"/>
         </scene>
-        <!--Frosted Flicks-->
+        <!--Flickr Gallery View Controller-->
         <scene sceneID="hMN-cL-L9M">
             <objects>
                 <tableViewController id="0Dj-Te-9mw" customClass="FlickrGalleryViewController" customModule="FrostedFlicks" customModuleProvider="target" sceneMemberID="viewController">
@@ -83,7 +83,7 @@
                             <outlet property="delegate" destination="0Dj-Te-9mw" id="k7v-Ul-uWw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Frosted Flicks" id="bva-Jf-tse"/>
+                    <navigationItem key="navigationItem" id="bva-Jf-tse"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JnP-cn-tsz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

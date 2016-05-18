@@ -91,12 +91,7 @@ class FlickrGalleryViewController: UITableViewController {
         
         // Set image and label of each cell of tableview
         let flickrImage = self.imagesList[indexPath.row]
-        if let url  = NSURL(string: flickrImage.media),
-            data = NSData(contentsOfURL: url) {
-            cell.FlickrTitle!.text = flickrImage.title
-            cell.FlickrImageView!.image = UIImage(data: data)
-        }
-
+        populateFlickrCell(flickrImage, cell: cell)
         return cell
     }
     
@@ -109,6 +104,21 @@ class FlickrGalleryViewController: UITableViewController {
 
             }
         }
+    }
+    
+    // MARK: Helpers
+    func populateFlickrCell(flickrImage: FlickrImage, cell: FlickrImageTableViewCell) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            dispatch_async(dispatch_get_main_queue(), {
+                let url = NSURL(string: flickrImage.media)
+                let imageData = NSData(contentsOfURL: url!)
+                if(imageData != nil){
+                    cell.FlickrImageView.image = UIImage(data: imageData!)
+                    cell.FlickrTitle.text = flickrImage.title
+                }
+            });
+        });
+        
     }
 
 }

@@ -13,13 +13,15 @@ import SwiftyJSON
 private let reuseIdentifier = "Cell"
 
 class FlickrGalleryViewController: UITableViewController {
-
+    
+    // MARK: Properties
     let FLICKR_API_KEY:String = "c2f381afce2dde17fa670662c27766a1"
     let FLICKR_URL:String = "https://api.flickr.com/services/feeds/photos_public.gne?format=json"
     let JSON_CALLBACK:Int = 1
+    let FULLSCREEN_SEGUE_IDENTIFIER:String = "ShowFullscreenSegue"
+    let CELL_IDENTIFIER:String = "FlickrImageTableViewCell"
     
-    private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
-    var imagesList = [FlickrImage]()
+    var imagesList:Array<FlickrImage> = [FlickrImage]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +61,10 @@ class FlickrGalleryViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier = "FlickrImageTableViewCell"
+        let cellIdentifier = CELL_IDENTIFIER
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! FlickrImageTableViewCell
         
+        // Set image and label of each cell of tableview
         let flickrImage = self.imagesList[indexPath.row]
         
         if let url  = NSURL(string: flickrImage.media),
@@ -75,7 +78,7 @@ class FlickrGalleryViewController: UITableViewController {
     
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if (segue.identifier == "ShowFullscreenSegue") {
+        if (segue.identifier == FULLSCREEN_SEGUE_IDENTIFIER) {
             if let destination = segue.destinationViewController as? FullscreenViewController,
             index = tableView.indexPathForSelectedRow?.row {
                 destination.flickrImageUrl = imagesList[index].media

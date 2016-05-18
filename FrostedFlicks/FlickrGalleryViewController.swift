@@ -12,24 +12,26 @@ import SwiftyJSON
 
 private let reuseIdentifier = "Cell"
 
-class FlickrGalleryViewController: UITableViewController {
+class FlickrGalleryViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+    @IBOutlet weak var searchBar: UISearchBar!
     
     // MARK: Properties
     let FLICKR_API_KEY:String = "c2f381afce2dde17fa670662c27766a1"
-    let FLICKR_URL:String = "https://api.flickr.com/services/feeds/photos_public.gne?format=json"
+    let FLICKR_PUBLIC_FEED_URL:String = "https://api.flickr.com/services/feeds/photos_public.gne?format=json"
+    let FLICKR_SEARCH_URL:String = "https://api.flickr.com/services/feeds/photos_public.gne?tags=searchTerm&;tagmode=any&format=json&nojsoncallback=1"
     let JSON_CALLBACK:Int = 1
     let FULLSCREEN_SEGUE_IDENTIFIER:String = "ShowFullscreenSegue"
     let CELL_IDENTIFIER:String = "FlickrImageTableViewCell"
     
     var imagesList:Array<FlickrImage> = [FlickrImage]()
+    var searchController = UISearchController(searchResultsController: nil)
 
     // MARK: Flickr gallery init
     override func viewDidLoad() {
         super.viewDidLoad()
         addRefreshControl()
-
-        getFlickrFeed()
-
+        addSearchControl()
+        getFlickrPublicFeed()
     }
     
     func addRefreshControl() {
@@ -42,8 +44,28 @@ class FlickrGalleryViewController: UITableViewController {
         }
     }
     
-    func getFlickrFeed() {
-        Alamofire.request(.GET, FLICKR_URL, parameters: ["nojsoncallback": JSON_CALLBACK])
+    func addSearchControl() {
+        searchBar.delegate = self
+        self.searchController.searchResultsUpdater = self
+        self.searchController.dimsBackgroundDuringPresentation = false
+        self.searchController.definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+    }
+    
+    // MARK: Flickr API calls
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        if let searchTerm = searchController.searchBar.text {
+            let url = FLICKR_SEARCH_URL.stringByReplacingOccurrencesOfString("searchTerm", withString: searchTerm)
+            getFlickrFeed(url)
+        }
+    }
+    
+    func getFlickrPublicFeed() {
+        getFlickrFeed(FLICKR_PUBLIC_FEED_URL)
+    }
+    
+    func getFlickrFeed(url:String) {
+        Alamofire.request(.GET, url, parameters: ["nojsoncallback": JSON_CALLBACK])
             .validate()
             .responseString { response in
                 switch response.result {
@@ -61,7 +83,7 @@ class FlickrGalleryViewController: UITableViewController {
                             media: media!)
                         self.imagesList.append(flickrImage)
                     }
-
+                    
                     self.tableView.reloadData()
                     self.refreshControl?.endRefreshing()
                     
@@ -70,11 +92,12 @@ class FlickrGalleryViewController: UITableViewController {
                 }
                 
         }
+
     }
     
     func refresh(sender:AnyObject) {
         // Refresh with new images from feed
-        getFlickrFeed()
+        getFlickrFeed(FLICKR_PUBLIC_FEED_URL)
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

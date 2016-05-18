@@ -12,10 +12,11 @@ import SwiftyJSON
 
 private let reuseIdentifier = "Cell"
 
-class FlickrGalleryViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
+class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
+    // MARK: Outlets
     @IBOutlet weak var searchBar: UISearchBar!
     
-    // MARK: Properties
+    // MARK: Constants
     let FLICKR_API_KEY:String = "c2f381afce2dde17fa670662c27766a1"
     let FLICKR_PUBLIC_FEED_URL:String = "https://api.flickr.com/services/feeds/photos_public.gne?format=json"
     let FLICKR_SEARCH_URL:String = "https://api.flickr.com/services/feeds/photos_public.gne?tags=searchTerm&;tagmode=any&format=json&nojsoncallback=1"
@@ -23,8 +24,8 @@ class FlickrGalleryViewController: UITableViewController, UISearchResultsUpdatin
     let FULLSCREEN_SEGUE_IDENTIFIER:String = "ShowFullscreenSegue"
     let CELL_IDENTIFIER:String = "FlickrImageTableViewCell"
     
+    // MARK: Properties
     var imagesList:Array<FlickrImage> = [FlickrImage]()
-    var searchController = UISearchController(searchResultsController: nil)
 
     // MARK: Flickr gallery init
     override func viewDidLoad() {
@@ -45,21 +46,21 @@ class FlickrGalleryViewController: UITableViewController, UISearchResultsUpdatin
     }
     
     func addSearchControl() {
-        searchBar.delegate = self
-        self.searchController.searchResultsUpdater = self
-        self.searchController.dimsBackgroundDuringPresentation = false
-        self.searchController.definesPresentationContext = true
-        tableView.tableHeaderView = searchController.searchBar
+        self.searchBar.delegate = self
+        tableView.tableHeaderView = self.searchBar
+    }
+    
+    // MARK: Search
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        let searchTerm = searchText.stringByReplacingOccurrencesOfString(" ", withString: "%20")
+            let url = FLICKR_SEARCH_URL.stringByReplacingOccurrencesOfString("searchTerm", withString: searchTerm)
+        
+            // Delay api call until after last keypress
+            NSObject.cancelPreviousPerformRequestsWithTarget(self)
+            self.performSelector(#selector(FlickrGalleryViewController.getFlickrFeed(_:)), withObject: url, afterDelay: 0.65)
     }
     
     // MARK: Flickr API calls
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        if let searchTerm = searchController.searchBar.text?.stringByReplacingOccurrencesOfString(" ", withString: "%20") {
-            let url = FLICKR_SEARCH_URL.stringByReplacingOccurrencesOfString("searchTerm", withString: searchTerm)
-            getFlickrFeed(url)
-        }
-    }
-    
     func getFlickrPublicFeed() {
         getFlickrFeed(FLICKR_PUBLIC_FEED_URL)
     }

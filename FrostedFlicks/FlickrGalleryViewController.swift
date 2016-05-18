@@ -25,30 +25,55 @@ class FlickrGalleryViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addRefreshControl()
+
+        getFlickrFeed()
+
+    }
+    
+    func addRefreshControl() {
+        if self.refreshControl == nil {
+            let refreshControl = UIRefreshControl()
+            refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+            refreshControl.addTarget(self, action: #selector(FlickrGalleryViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+            self.refreshControl = refreshControl
+            tableView.addSubview(refreshControl)
+        }
+    }
+    
+    func getFlickrFeed() {
         Alamofire.request(.GET, FLICKR_URL, parameters: ["nojsoncallback": JSON_CALLBACK])
             .validate()
             .responseString { response in
                 switch response.result {
-                    case .Success(let data):
-                        // Replace escaped single quotes with single quotes because Flickr escapes them
-                        // and causes JSON linter to break
-                        let newData = data.stringByReplacingOccurrencesOfString("\\'", withString: "'")
-                        let images = JSON.parse(newData)["items"]
-                        self.imagesList = [FlickrImage]()
-                        for (_,imageData):(String, JSON) in images {
-                            let title = imageData["title"].string
-                            let media = imageData["media"]["m"].string
-                            let flickrImage = FlickrImage(
-                                title: title!,
-                                media: media!)
-                            self.imagesList.append(flickrImage)
-                        }
-                        self.tableView.reloadData()
-                    case .Failure(let error):
-                        print("Request failed with error: \(error)")
-                }
+                case .Success(let data):
+                    // Replace escaped single quotes with single quotes because Flickr escapes them
+                    // and causes JSON linter to break
+                    let newData = data.stringByReplacingOccurrencesOfString("\\'", withString: "'")
+                    let images = JSON.parse(newData)["items"]
+                    self.imagesList = [FlickrImage]()
+                    for (_,imageData):(String, JSON) in images {
+                        let title = imageData["title"].string
+                        let media = imageData["media"]["m"].string
+                        let flickrImage = FlickrImage(
+                            title: title!,
+                            media: media!)
+                        self.imagesList.append(flickrImage)
+                    }
 
-            }
+                    self.tableView.reloadData()
+                    self.refreshControl?.endRefreshing()
+                    
+                case .Failure(let error):
+                    print("Request failed with error: \(error)")
+                }
+                
+        }
+    }
+    func refresh(sender:AnyObject) {
+        // Code to refresh table view
+        getFlickrFeed()
+        
 
     }
     

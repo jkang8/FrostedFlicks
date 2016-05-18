@@ -54,7 +54,7 @@ class FlickrGalleryViewController: UITableViewController, UISearchResultsUpdatin
     
     // MARK: Flickr API calls
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        if let searchTerm = searchController.searchBar.text {
+        if let searchTerm = searchController.searchBar.text?.stringByReplacingOccurrencesOfString(" ", withString: "%20") {
             let url = FLICKR_SEARCH_URL.stringByReplacingOccurrencesOfString("searchTerm", withString: searchTerm)
             getFlickrFeed(url)
         }

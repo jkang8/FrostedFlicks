@@ -23,6 +23,7 @@ class FlickrGalleryViewController: UITableViewController {
     
     var imagesList:Array<FlickrImage> = [FlickrImage]()
 
+    // MARK: Flickr gallery init
     override func viewDidLoad() {
         super.viewDidLoad()
         addRefreshControl()
@@ -32,9 +33,9 @@ class FlickrGalleryViewController: UITableViewController {
     }
     
     func addRefreshControl() {
+        // Setup pull to refresh
         if self.refreshControl == nil {
             let refreshControl = UIRefreshControl()
-            refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
             refreshControl.addTarget(self, action: #selector(FlickrGalleryViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
             self.refreshControl = refreshControl
             tableView.addSubview(refreshControl)
@@ -70,11 +71,10 @@ class FlickrGalleryViewController: UITableViewController {
                 
         }
     }
+    
     func refresh(sender:AnyObject) {
-        // Code to refresh table view
+        // Refresh with new images from feed
         getFlickrFeed()
-        
-
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -91,7 +91,6 @@ class FlickrGalleryViewController: UITableViewController {
         
         // Set image and label of each cell of tableview
         let flickrImage = self.imagesList[indexPath.row]
-        
         if let url  = NSURL(string: flickrImage.media),
             data = NSData(contentsOfURL: url) {
             cell.FlickrTitle!.text = flickrImage.title

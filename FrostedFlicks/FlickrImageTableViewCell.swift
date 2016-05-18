@@ -9,13 +9,9 @@
 import UIKit
 
 class FlickrImageTableViewCell: UITableViewCell {
-    /*
-    override func layoutSubviews() {
-        self.imageView!.frame = CGRectMake(self.imageView!.frame.origin.x, self.imageView!.frame.origin.y, 100, 100)
-        self.imageView!.contentMode = .ScaleAspectFit
-        self.imageView?.clipsToBounds = true
-    }
- */
+    @IBOutlet weak var FlickrTitle: UILabel!
+    @IBOutlet weak var FlickrImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

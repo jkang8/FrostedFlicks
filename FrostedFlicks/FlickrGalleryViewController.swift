@@ -66,46 +66,22 @@ class FlickrGalleryViewController: UITableViewController {
         
         if let url  = NSURL(string: flickrImage.media),
             data = NSData(contentsOfURL: url) {
-            cell.textLabel!.text = flickrImage.title
-            cell.imageView!.image = cropToBounds(UIImage(data: data)!, width: 96, height: 96)
+            cell.FlickrTitle!.text = flickrImage.title
+            cell.FlickrImageView!.image = UIImage(data: data)
         }
 
         return cell
     }
+    
+    // MARK: Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "ShowFullscreenSegue") {
+            if let destination = segue.destinationViewController as? FullscreenViewController,
+            index = tableView.indexPathForSelectedRow?.row {
+                destination.flickrImageUrl = imagesList[index].media
 
-}
-
-// Crop image in center
-func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
-    let contextImage: UIImage = UIImage(CGImage: image.CGImage!)
-    
-    let contextSize: CGSize = contextImage.size
-    
-    var posX: CGFloat = 0.0
-    var posY: CGFloat = 0.0
-    var cgwidth: CGFloat = CGFloat(width)
-    var cgheight: CGFloat = CGFloat(height)
-    
-    // See what size is longer and create the center off of that
-    if contextSize.width > contextSize.height {
-        posX = ((contextSize.width - contextSize.height) / 2)
-        posY = 0
-        cgwidth = contextSize.height
-        cgheight = contextSize.height
-    } else {
-        posX = 0
-        posY = ((contextSize.height - contextSize.width) / 2)
-        cgwidth = contextSize.width
-        cgheight = contextSize.width
+            }
+        }
     }
-    
-    let rect: CGRect = CGRectMake(posX, posY, cgwidth, cgheight)
-    
-    // Create bitmap image from context using the rect
-    let imageRef: CGImageRef = CGImageCreateWithImageInRect(contextImage.CGImage, rect)!
-    
-    // Create a new image based on the imageRef and rotate back to the original orientation
-    let image: UIImage = UIImage(CGImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
-    
-    return image
+
 }

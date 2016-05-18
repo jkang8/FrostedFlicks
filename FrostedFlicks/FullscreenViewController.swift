@@ -11,7 +11,6 @@ import UIKit
 class FullscreenViewController: UIViewController {
     var flickrImageUrl = String()
     
-    
     @IBOutlet weak var flickrImageFullscreen: UIImageView!
 
     override func viewWillAppear(animated: Bool) {

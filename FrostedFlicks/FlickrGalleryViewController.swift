@@ -13,9 +13,10 @@ import SwiftyJSON
 private let reuseIdentifier = "Cell"
 
 class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
+
     // MARK: Outlets
     @IBOutlet weak var searchBar: UISearchBar!
-    
+
     // MARK: Constants
     let FLICKR_API_KEY:String = "c2f381afce2dde17fa670662c27766a1"
     let FLICKR_PUBLIC_FEED_URL:String = "https://api.flickr.com/services/feeds/photos_public.gne?format=json"
@@ -23,7 +24,7 @@ class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
     let JSON_CALLBACK:Int = 1
     let FULLSCREEN_SEGUE_IDENTIFIER:String = "ShowFullscreenSegue"
     let CELL_IDENTIFIER:String = "FlickrImageTableViewCell"
-    
+
     // MARK: Properties
     var imagesList:Array<FlickrImage> = [FlickrImage]()
 
@@ -44,20 +45,34 @@ class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
             tableView.addSubview(refreshControl)
         }
     }
-    
+
     func addSearchControl() {
         self.searchBar.delegate = self
         tableView.tableHeaderView = self.searchBar
     }
-    
+
     // MARK: Search
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         let searchTerm = searchText.stringByReplacingOccurrencesOfString(" ", withString: "%20")
             let url = FLICKR_SEARCH_URL.stringByReplacingOccurrencesOfString("searchTerm", withString: searchTerm)
-        
-            // Delay api call until after last keypress
             NSObject.cancelPreviousPerformRequestsWithTarget(self)
-            self.performSelector(#selector(FlickrGalleryViewController.getFlickrFeed(_:)), withObject: url, afterDelay: 0.65)
+            self.performSelector(#selector(FlickrGalleryViewController.getFlickrFeed(_:)), withObject: url, afterDelay: 0.5)
+    }
+
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+        searchBar.becomeFirstResponder()
+    }
+
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
+    }
+
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.setShowsCancelButton(false, animated: true)
+        searchBar.resignFirstResponder()
     }
     
     // MARK: Flickr API calls

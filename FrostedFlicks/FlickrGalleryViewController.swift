@@ -81,34 +81,35 @@ class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func getFlickrFeed(url:String) {
-        Alamofire.request(.GET, url, parameters: ["nojsoncallback": JSON_CALLBACK])
-            .validate()
-            .responseString { response in
-                switch response.result {
-                case .Success(let data):
-                    // Replace escaped single quotes with single quotes because Flickr escapes them
-                    // and causes JSON linter to break
-                    let newData = data.stringByReplacingOccurrencesOfString("\\'", withString: "'")
-                    let images = JSON.parse(newData)["items"]
-                    self.imagesList = [FlickrImage]()
-                    for (_,imageData):(String, JSON) in images {
-                        let title = imageData["title"].string
-                        let media = imageData["media"]["m"].string
-                        let flickrImage = FlickrImage(
-                            title: title!,
-                            media: media!)
-                        self.imagesList.append(flickrImage)
+        if let validUrl = NSURL(string: url) {
+            Alamofire.request(.GET, validUrl, parameters: ["nojsoncallback": JSON_CALLBACK])
+                .validate()
+                .responseString { response in
+                    switch response.result {
+                    case .Success(let data):
+                        // Replace escaped single quotes with single quotes because Flickr escapes them
+                        // and causes JSON linter to break
+                        let newData = data.stringByReplacingOccurrencesOfString("\\'", withString: "'")
+                        let images = JSON.parse(newData)["items"]
+                        self.imagesList = [FlickrImage]()
+                        for (_,imageData):(String, JSON) in images {
+                            let title = imageData["title"].string
+                            let media = imageData["media"]["m"].string
+                            let flickrImage = FlickrImage(
+                                title: title!,
+                                media: media!)
+                            self.imagesList.append(flickrImage)
+                        }
+                        
+                        self.tableView.reloadData()
+                        self.refreshControl?.endRefreshing()
+                        
+                    case .Failure(let error):
+                        print("Request failed with error: \(error)")
                     }
                     
-                    self.tableView.reloadData()
-                    self.refreshControl?.endRefreshing()
-                    
-                case .Failure(let error):
-                    print("Request failed with error: \(error)")
-                }
-                
+            }
         }
-
     }
     
     func refresh(sender:AnyObject) {

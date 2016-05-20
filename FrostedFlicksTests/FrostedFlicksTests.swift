@@ -8,7 +8,6 @@
 
 import XCTest
 @testable import FrostedFlicks
-@testable import Pods_FrostedFlicks
 
 class FrostedFlicksTests: XCTestCase {
     

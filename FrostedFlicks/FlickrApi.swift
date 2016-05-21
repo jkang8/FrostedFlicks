@@ -29,6 +29,7 @@ class FlickrApi {
         getFeed(url, completionHandler: completionHandler)
     }
     
+    // MARK: Private methods
     private func getFeed(url: String, completionHandler: (responseObject: String?, error: NSError?) -> ()) {
         //it passes your closure to makeAuthenticateUserCall
         getFlickrFeed(url, completionHandler: completionHandler)

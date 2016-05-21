@@ -9,6 +9,8 @@
 import UIKit
 
 class FlickrImage {
+    
+    // MARK: Properties
     var title: String
     var media: String
     

@@ -7,15 +7,14 @@
 //
 
 import UIKit
-import Alamofire
 import SwiftyJSON
-
-private let reuseIdentifier = "Cell"
 
 class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
 
     // MARK: Outlets
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    // MARK: Constants
     let FULLSCREEN_SEGUE_IDENTIFIER:String = "ShowFullscreenSegue"
     let CELL_IDENTIFIER:String = "FlickrImageTableViewCell"
 
@@ -77,6 +76,7 @@ class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
+    // MARK: TableView
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }

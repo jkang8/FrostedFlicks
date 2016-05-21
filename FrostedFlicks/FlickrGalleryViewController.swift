@@ -16,12 +16,6 @@ class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
 
     // MARK: Outlets
     @IBOutlet weak var searchBar: UISearchBar!
-
-    // MARK: Constants
-    let FLICKR_API_KEY:String = "c2f381afce2dde17fa670662c27766a1"
-    let FLICKR_PUBLIC_FEED_URL:String = "https://api.flickr.com/services/feeds/photos_public.gne?format=json"
-    let FLICKR_SEARCH_URL:String = "https://api.flickr.com/services/feeds/photos_public.gne?tags=searchTerm&;tagmode=any&format=json&nojsoncallback=1"
-    let JSON_CALLBACK:Int = 1
     let FULLSCREEN_SEGUE_IDENTIFIER:String = "ShowFullscreenSegue"
     let CELL_IDENTIFIER:String = "FlickrImageTableViewCell"
 
@@ -33,7 +27,10 @@ class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         addRefreshControl()
         addSearchControl()
-        getFlickrPublicFeed()
+        FlickrApi().getFlickrPublicFeed{ (responseObject, error) in
+            self.loadFlickrImages(responseObject!)
+        }
+        //getFlickrPublicFeed()
     }
     
     func addRefreshControl() {
@@ -53,12 +50,14 @@ class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
 
     // MARK: Search
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        let searchTerm = searchText.stringByReplacingOccurrencesOfString(" ", withString: "%20")
-            let url = FLICKR_SEARCH_URL.stringByReplacingOccurrencesOfString("searchTerm", withString: searchTerm)
-            NSObject.cancelPreviousPerformRequestsWithTarget(self)
-            self.performSelector(#selector(FlickrGalleryViewController.getFlickrFeed(_:)), withObject: url, afterDelay: 0.5)
+        let searchTerms = searchText.stringByReplacingOccurrencesOfString(" ", withString: "%20")
+        NSObject.cancelPreviousPerformRequestsWithTarget(self)
+        self.performSelector(#selector(FlickrGalleryViewController.getFlickrSearchFeed(_:)), withObject: searchTerms, afterDelay: 0.5)
+        
     }
+    
 
+    
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
         searchBar.becomeFirstResponder()
@@ -75,46 +74,11 @@ class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
     
-    // MARK: Flickr API calls
-    func getFlickrPublicFeed() {
-        getFlickrFeed(FLICKR_PUBLIC_FEED_URL)
-    }
-    
-    func getFlickrFeed(url:String) {
-        if let validUrl = NSURL(string: url) {
-            Alamofire.request(.GET, validUrl, parameters: ["nojsoncallback": JSON_CALLBACK])
-                .validate()
-                .responseString { response in
-                    switch response.result {
-                    case .Success(let data):
-                        // Replace escaped single quotes with single quotes because Flickr escapes them
-                        // and causes JSON linter to break
-                        let newData = data.stringByReplacingOccurrencesOfString("\\'", withString: "'")
-                        let images = JSON.parse(newData)["items"]
-                        self.imagesList = [FlickrImage]()
-                        for (_,imageData):(String, JSON) in images {
-                            let title = imageData["title"].string
-                            let media = imageData["media"]["m"].string
-                            let flickrImage = FlickrImage(
-                                title: title!,
-                                media: media!)
-                            self.imagesList.append(flickrImage)
-                        }
-                        
-                        self.tableView.reloadData()
-                        self.refreshControl?.endRefreshing()
-                        
-                    case .Failure(let error):
-                        print("Request failed with error: \(error)")
-                    }
-                    
-            }
-        }
-    }
-    
     func refresh(sender:AnyObject) {
         // Refresh with new images from feed
-        getFlickrFeed(FLICKR_PUBLIC_FEED_URL)
+        FlickrApi().getFlickrPublicFeed{ (responseObject, error) in
+            self.loadFlickrImages(responseObject!)
+        }
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -160,5 +124,31 @@ class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
         });
         
     }
+    
+    func getFlickrSearchFeed(searchTerms: String) {
+        FlickrApi().getFlickrSearchFeed(searchTerms, completionHandler: {(responseObject, error) in
+            self.loadFlickrImages(responseObject!)
+        })
+    }
+    
+    func loadFlickrImages(jsonData: String) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            dispatch_async(dispatch_get_main_queue(), {
+                let images = JSON.parse(jsonData)["items"]
+                self.imagesList = [FlickrImage]()
+                for (_,imageData):(String, JSON) in images {
+                    let title = imageData["title"].string
+                    let media = imageData["media"]["m"].string
+                    let flickrImage = FlickrImage(
+                        title: title!,
+                        media: media!)
+                    self.imagesList.append(flickrImage)
+                }
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            });
+        });
+    }
 
 }
+

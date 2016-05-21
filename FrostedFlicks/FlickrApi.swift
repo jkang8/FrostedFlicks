@@ -18,20 +18,20 @@ class FlickrApi {
     
     // MARK: Flickr API calls
     func getFlickrPublicFeed(completionHandler: (responseObject: String?, error: NSError?) -> ()) {
-        //it passes your closure to makeAuthenticateUserCall
+        //it passes your closure to getFeed
         let url = self.FLICKR_PUBLIC_FEED_URL
         getFeed(url, completionHandler: completionHandler)
     }
     
     func getFlickrSearchFeed(searchTerms: String, completionHandler: (responseObject: String?, error: NSError?) -> ()) {
-        //it passes your closure to makeAuthenticateUserCall
+        //it passes your closure to getFeed
         let url = FLICKR_SEARCH_URL.stringByReplacingOccurrencesOfString("searchTerm", withString: searchTerms)
         getFeed(url, completionHandler: completionHandler)
     }
     
     // MARK: Private methods
     private func getFeed(url: String, completionHandler: (responseObject: String?, error: NSError?) -> ()) {
-        //it passes your closure to makeAuthenticateUserCall
+        // this passes your closure to getFlickrFeed
         getFlickrFeed(url, completionHandler: completionHandler)
     }
     

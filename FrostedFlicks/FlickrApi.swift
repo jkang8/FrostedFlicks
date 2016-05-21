@@ -29,19 +29,21 @@ class FlickrApi {
         getFeed(url, completionHandler: completionHandler)
     }
     
-    func getFeed(url: String, completionHandler: (responseObject: String?, error: NSError?) -> ()) {
+    private func getFeed(url: String, completionHandler: (responseObject: String?, error: NSError?) -> ()) {
         //it passes your closure to makeAuthenticateUserCall
         getFlickrFeed(url, completionHandler: completionHandler)
     }
     
-    func getFlickrFeed(url:String, completionHandler: (responseObject: String?,
+    private func getFlickrFeed(url:String, completionHandler: (responseObject: String?,
         error: NSError?) -> ()) {
-        Alamofire.request(.GET, url, parameters: ["nojsoncallback": JSON_CALLBACK])
-            .responseString { response in
-                // Replace escaped single quotes with single quotes because Flickr escapes them
-                // and causes JSON linter to break
-                let jsonData = response.result.value!.stringByReplacingOccurrencesOfString("\\'", withString: "'")
-                completionHandler(responseObject: jsonData as String!, error: response.result.error)
+        if let validUrl = NSURL(string: url) {
+            Alamofire.request(.GET, validUrl, parameters: ["nojsoncallback": JSON_CALLBACK])
+                .responseString { response in
+                    // Replace escaped single quotes with single quotes because Flickr escapes them
+                    // and causes JSON linter to break
+                    let jsonData = response.result.value!.stringByReplacingOccurrencesOfString("\\'", withString: "'")
+                    completionHandler(responseObject: jsonData as String!, error: response.result.error)
+            }
         }
     }
 }

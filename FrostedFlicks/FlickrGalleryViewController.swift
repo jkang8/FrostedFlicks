@@ -30,7 +30,6 @@ class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
         FlickrApi().getFlickrPublicFeed{ (responseObject, error) in
             self.loadFlickrImages(responseObject!)
         }
-        //getFlickrPublicFeed()
     }
     
     func addRefreshControl() {
@@ -52,12 +51,9 @@ class FlickrGalleryViewController: UITableViewController, UISearchBarDelegate {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         let searchTerms = searchText.stringByReplacingOccurrencesOfString(" ", withString: "%20")
         NSObject.cancelPreviousPerformRequestsWithTarget(self)
-        self.performSelector(#selector(FlickrGalleryViewController.getFlickrSearchFeed(_:)), withObject: searchTerms, afterDelay: 0.5)
-        
+        self.performSelector(#selector(FlickrGalleryViewController.getFlickrSearchFeed(_:)), withObject: searchTerms, afterDelay: 0.8)
     }
-    
 
-    
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
         searchBar.becomeFirstResponder()

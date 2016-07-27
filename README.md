@@ -11,5 +11,6 @@ iOS Flickr App
 * Search Flickr with search bar
 * Pulldown to refresh
 
+# Screenshots
 ![Screenshots](./screenshots/fullscreen_screenshot.png)
 ![Screenshots](./screenshots/screenshot.png)

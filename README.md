@@ -10,3 +10,6 @@ iOS Flickr App
 * Tap table cell to fullscreen
 * Search Flickr with search bar
 * Pulldown to refresh
+
+![Screenshots](./screenshots/fullscreen_screenshot.png)
+![Screenshots](./screenshots/screenshot.png)
